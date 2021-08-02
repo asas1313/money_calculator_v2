@@ -217,6 +217,10 @@ class MainTab extends StatelessWidget {
                         )
                       : Container(),
                 ),
+                ElevatedButton(
+                  onPressed: () => appController.changeTheme(),
+                  child: Text('Change Theme'),
+                ),
               ],
             ),
           ],
