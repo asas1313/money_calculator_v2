@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <base href="/">
+    <base href="/">
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta content="A new Flutter project." name="description">
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="money_calculator_v2">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+    <!-- iOS meta tags & icons -->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="money_calculator_v2" name="apple-mobile-web-app-title">
+    <link href="icons/Icon-192.png" rel="apple-touch-icon">
 
-  <title>money_calculator_v2</title>
-  <link rel="manifest" href="manifest.json">
+    <title>money_calculator_v2</title>
+    <link href="manifest.json" rel="manifest">
 </head>
 <body>
-  <script>
+
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-core.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+
+<script>
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
     function loadMainDartJs() {
@@ -84,13 +92,17 @@
 
 
 
-  </script>
 
-  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
 
-  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
 
-  <script>
+
+
+
+
+
+</script>
+
+<script>
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   var firebaseConfig = {
@@ -109,7 +121,19 @@
 
 
 
-  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
 
 </body>
 </html>
