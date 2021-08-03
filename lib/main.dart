@@ -4,12 +4,16 @@ import 'package:money_calculator_v2/app/modules/auth/controllers/auth_controller
 import 'package:spaces/spaces.dart';
 
 import 'app/core/values/app_translations.dart';
+import 'app/core/values/firebase.dart';
 import 'app/modules/app_controller.dart';
 import 'app/routes/app_pages.dart';
 
-void main() {
-  Get.put(AppController());
-  Get.put(AuthController());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initialization.then((value) {
+    Get.put(AppController());
+    Get.put(AuthController());
+  });
   runApp(App());
 }
 
@@ -34,8 +38,17 @@ class App extends StatelessWidget {
           }
           return SpacingData.generate(10);
         },
-        child: child ?? SizedBox(),
+        child: child ?? Container(),
       ),
+    );
+  }
+}
+
+class Splash extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(child: CircularProgressIndicator()),
     );
   }
 }

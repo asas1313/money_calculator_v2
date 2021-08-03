@@ -9,6 +9,7 @@ class AppController extends GetxController {
   static var instance = Get.find<AppController>();
 
   final _locale = 'en_US'.obs;
+  final isLoginWidgetDisplayed = true.obs;
 
   String get locale => _locale.value;
 
@@ -20,5 +21,9 @@ class AppController extends GetxController {
 
   changeTheme() {
     Get.changeTheme(Get.isDarkMode ? LightTheme() : DarkTheme());
+  }
+
+  changeDisplayedAuthWidget() {
+    isLoginWidgetDisplayed.value = !isLoginWidgetDisplayed.value;
   }
 }

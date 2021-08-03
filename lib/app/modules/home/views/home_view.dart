@@ -206,16 +206,17 @@ class MainTab extends StatelessWidget {
                   child: Text('English'),
                 ),
                 ElevatedButton(
-                  onPressed: () => authController.SignIn(),
+                  onPressed: () => authController.signIn(),
                   child: Text('Sign In'),
                 ),
                 Obx(
-                  () => authController.isLoggedIn.value
-                      ? ElevatedButton(
-                          onPressed: () => authController.SignOut(),
-                          child: Text('Sign Out'),
-                        )
-                      : Container(),
+                  () => Visibility(
+                    visible: authController.isLoggedIn.value,
+                    child: ElevatedButton(
+                      onPressed: () => authController.signOut(),
+                      child: Text('Sign Out'),
+                    ),
+                  ),
                 ),
                 ElevatedButton(
                   onPressed: () => appController.changeTheme(),
