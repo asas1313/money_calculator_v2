@@ -16,14 +16,14 @@ class AuthController extends GetxController {
 
   final repository = UserRepository(provider: UserFbProvider());
 
-  final name = TextEditingController();
+/*  final name = TextEditingController();
   final email = TextEditingController();
-  final password = TextEditingController();
+  final password = TextEditingController();*/
 
-/*// TODO: Remove credentials
+// TODO: Remove credentials
   final name = TextEditingController(text: 'Asasas');
   final email = TextEditingController(text: 'as@as.as');
-  final password = TextEditingController(text: 'asasas');*/
+  final password = TextEditingController(text: 'asasas');
 
   @override
   void onInit() {
@@ -33,13 +33,14 @@ class AuthController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    auth.authStateChanges().listen((User? user) => _setInitialScreen);
+    _setScreen(null);
   }
 
   @override
   void onClose() {}
 
-  _setInitialScreen(User? user) {
+  _setScreen(User? user) {
+    print('auth state changed');
     if (user == null) {
       isLoggedIn.value = false;
       Get.offAll(() => AuthView());
@@ -49,10 +50,13 @@ class AuthController extends GetxController {
     }
   }
 
-  SignIn() async {
+  signIn() async {
     try {
-      await auth.signInWithEmailAndPassword(
-          email: email.text.trim(), password: password.text.trim());
+      await auth
+          .signInWithEmailAndPassword(
+              email: email.text.trim(), password: password.text.trim())
+          .then((userCredential) => _setScreen(userCredential.user))
+          .onError((error, stackTrace) => print('Error: ${error.toString()}'));
       isLoggedIn.value = true;
     } catch (e) {
       debugPrint(e.toString());
@@ -61,24 +65,28 @@ class AuthController extends GetxController {
     }
   }
 
-  SignUp() async {
+  signUp() async {
     try {
       await auth
           .createUserWithEmailAndPassword(
               email: email.text.trim(), password: password.text.trim())
-          .then((credential) => repository.save(UserModel(
-                id: credential.user!.uid,
-                name: credential.user!.displayName,
-                email: credential.user!.email,
-              )));
+          .then((credential) {
+        repository.save(UserModel(
+          id: credential.user!.uid,
+          name: credential.user!.displayName,
+          email: credential.user!.email,
+        ));
+        isLoggedIn.value = true;
+        _setScreen(credential.user);
+      });
     } catch (e) {
       debugPrint(e.toString());
       Get.snackbar(MessageKeys.sign_in_failed.tr, MessageKeys.try_again.tr);
     }
   }
 
-  SignOut() async {
-    auth.signOut();
+  signOut() async {
+    auth.signOut().then((value) => _setScreen(null));
     isLoggedIn.value = false;
   }
 }
