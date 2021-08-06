@@ -14,53 +14,39 @@ class AuthView extends GetView<AuthController> {
     return Material(
       child: Obx(
         () => SingleChildScrollView(
-          child: Stack(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                bg1,
-                width: double.infinity,
-                height: Get.height,
-                fit: BoxFit.cover,
+                logo_white_sm,
+                width: 140,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Visibility(
-                      visible: appController.isLoginWidgetDisplayed.value,
-                      child: LoginWidget()),
-                  Visibility(
-                      visible: !appController.isLoginWidgetDisplayed.value,
-                      child: RegistrationWidget()),
-                  Visibility(
-                    visible: appController.isLoginWidgetDisplayed.value,
-                    child: BottomTextWidget(
-                      onTap: () {
-                        appController.changeDisplayedAuthWidget();
-                      },
-                      text1: "Don\'t have an account?",
-                      text2: "Create account!",
-                    ),
-                  ),
-                  Visibility(
-                    visible: !appController.isLoginWidgetDisplayed.value,
-                    child: BottomTextWidget(
-                      onTap: () {
-                        appController.changeDisplayedAuthWidget();
-                      },
-                      text1: "Already have an account?",
-                      text2: "Sign in!!",
-                    ),
-                  ),
-                ],
-              ),
-              Positioned(
-                top: Get.height / 6,
-                left: 20,
-                child: Image.asset(
-                  logo_sm,
-                  width: 140,
+              Visibility(
+                  visible: appController.isLoginWidgetDisplayed.value,
+                  child: LoginWidget()),
+              Visibility(
+                  visible: !appController.isLoginWidgetDisplayed.value,
+                  child: RegistrationWidget()),
+              Visibility(
+                visible: appController.isLoginWidgetDisplayed.value,
+                child: BottomTextWidget(
+                  onPressed: () {
+                    appController.changeDisplayedAuthWidget();
+                  },
+                  text1: "Don\'t have an account?",
+                  text2: "Create account!",
                 ),
-              )
+              ),
+              Visibility(
+                visible: !appController.isLoginWidgetDisplayed.value,
+                child: BottomTextWidget(
+                  onPressed: () {
+                    appController.changeDisplayedAuthWidget();
+                  },
+                  text1: "Already have an account?",
+                  text2: "Sign in!!",
+                ),
+              ),
             ],
           ),
         ),

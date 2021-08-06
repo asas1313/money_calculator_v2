@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:money_calculator_v2/app/modules/auth/controllers/auth_controller.dart';
 import 'package:spaces/spaces.dart';
 
+import 'app/core/theme/custom_theme.dart';
 import 'app/core/values/app_translations.dart';
 import 'app/core/values/firebase.dart';
 import 'app/modules/app_controller.dart';
+import 'app/modules/auth/controllers/auth_controller.dart';
 import 'app/routes/app_pages.dart';
 
 void main() async {
@@ -40,6 +41,8 @@ class App extends StatelessWidget {
         },
         child: child ?? Container(),
       ),
+      theme: CustomTheme.lightTheme,
+      darkTheme: CustomTheme.darkTheme,
     );
   }
 }

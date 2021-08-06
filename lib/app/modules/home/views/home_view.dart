@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:money_calculator_v2/app/core/values/controllers.dart';
 import 'package:money_calculator_v2/app/core/values/languages/message_keys.dart';
+import 'package:money_calculator_v2/app/global_widgets/custom_button.dart';
+import 'package:money_calculator_v2/app/global_widgets/custom_dropdown/custom_dropdawn.dart';
+import 'package:money_calculator_v2/app/global_widgets/custom_dropdown/custom_dropdown_controller.dart';
+import 'package:money_calculator_v2/app/global_widgets/custom_form.dart';
 import 'package:spaces/spaces.dart';
 
 import '../controllers/home_controller.dart';
@@ -181,13 +185,24 @@ class MainTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final spacing = Spacing.of(context);
+    final languageController = CustomDropdownController(
+      list: ['Lietuviškai', 'English'],
+      onChanged: (value) {
+        if (value == 'Lietuviškai') {
+          appController.locale = 'lt_LT';
+        } else {
+          appController.locale = 'en_EN';
+        }
+      },
+      labelText: MessageKeys.choose_language.tr,
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text('HomeView'),
         centerTitle: true,
       ),
-      body: Container(
-        color: Colors.green.withOpacity(0.2),
+      body: CustomForm(
         child: ListView(
           children: [
             SpacedColumn.normal(
@@ -197,30 +212,23 @@ class MainTab extends StatelessWidget {
                   MessageKeys.hello.tr,
                   style: TextStyle(fontSize: 20),
                 ),
-                ElevatedButton(
-                  onPressed: () => appController.locale = 'lt_LT',
-                  child: Text('Lietuviškai'),
-                ),
-                ElevatedButton(
-                  onPressed: () => appController.locale = 'en_EN',
-                  child: Text('English'),
-                ),
-                ElevatedButton(
+                CustomDropdown(controller: languageController),
+                CustomButton(
                   onPressed: () => authController.signIn(),
-                  child: Text('Sign In'),
+                  text: 'Sign In',
                 ),
                 Obx(
                   () => Visibility(
                     visible: authController.isLoggedIn.value,
-                    child: ElevatedButton(
+                    child: CustomButton(
                       onPressed: () => authController.signOut(),
-                      child: Text('Sign Out'),
+                      text: 'Sign Out',
                     ),
                   ),
                 ),
-                ElevatedButton(
+                CustomButton(
                   onPressed: () => appController.changeTheme(),
-                  child: Text('Change Theme'),
+                  text: 'Change Theme',
                 ),
               ],
             ),

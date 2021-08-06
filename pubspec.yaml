@@ -26,4 +26,5 @@ flutter:
   assets:
     - assets/img/bg1.png
     - assets/img/logo_sm.png
+    - assets/img/logo_white_sm.png
 
