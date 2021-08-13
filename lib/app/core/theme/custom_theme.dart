@@ -22,12 +22,11 @@ class Dark {
 
 class CustomTheme {
   static ThemeData get lightTheme {
-    return ThemeData(
+    return ThemeData.light().copyWith(
       brightness: Brightness.light,
       primaryColor: Light.primaryColor,
       accentColor: Light.accentColor,
       backgroundColor: Light.backgroundColor,
-      fontFamily: 'Montserrat',
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           shape: _elevatedButtonShape,
@@ -43,12 +42,11 @@ class CustomTheme {
   }
 
   static ThemeData get darkTheme {
-    return ThemeData(
+    return ThemeData.dark().copyWith(
       brightness: Brightness.dark,
       primaryColor: Dark.primaryColor,
       accentColor: Dark.accentColor,
       backgroundColor: Dark.backgroundColor,
-      fontFamily: 'Montserrat',
       textTheme: ThemeData.dark().textTheme,
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(

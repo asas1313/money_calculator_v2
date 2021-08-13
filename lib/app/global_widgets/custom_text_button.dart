@@ -7,14 +7,14 @@ import 'package:money_calculator_v2/app/core/values/global_widget_values.dart';
 
 import 'custom_text.dart';
 
-class CustomButton extends StatelessWidget {
+class CustomTextButton extends StatelessWidget {
   final String text;
   final Function()? onPressed;
   final double? width;
   final double textSize;
   final double margins;
 
-  const CustomButton({
+  const CustomTextButton({
     Key? key,
     required this.text,
     required this.onPressed,
@@ -25,7 +25,7 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return TextButton(
       onPressed: onPressed,
       child: Container(
         width: width != null
