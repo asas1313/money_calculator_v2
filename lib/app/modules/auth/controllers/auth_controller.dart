@@ -6,7 +6,7 @@ import 'package:money_calculator_v2/app/core/values/firebase.dart';
 import 'package:money_calculator_v2/app/core/values/languages/message_keys.dart';
 import 'package:money_calculator_v2/app/data/model/user_model.dart';
 import 'package:money_calculator_v2/app/data/provider/user_fb_provider.dart';
-import 'package:money_calculator_v2/app/data/services/user_repository.dart';
+import 'package:money_calculator_v2/app/data/repositories/user_repository.dart';
 import 'package:money_calculator_v2/app/modules/auth/views/auth_view.dart';
 import 'package:money_calculator_v2/app/modules/home/views/home_view.dart';
 

@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:money_calculator_v2/app/core/values/controllers.dart';
 import 'package:money_calculator_v2/app/core/values/languages/message_keys.dart';
-import 'package:money_calculator_v2/app/global_widgets/custom_button.dart';
-import 'package:money_calculator_v2/app/global_widgets/custom_dropdown/custom_dropdawn.dart';
-import 'package:money_calculator_v2/app/global_widgets/custom_dropdown/custom_dropdown_controller.dart';
-import 'package:money_calculator_v2/app/global_widgets/custom_form.dart';
+import 'package:money_calculator_v2/app/global_widgets/custom_widgets.dart';
 import 'package:spaces/spaces.dart';
 
 import '../controllers/home_controller.dart';
@@ -13,34 +10,88 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
+    final spacing = Spacing.of(context);
     return DefaultTabController(
-      length: 4,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Spacing'),
+          title: CustomTextButton(
+            onPressed: () => HomeView(),
+            text: MessageKeys.app_name.tr,
+            width: 220,
+          ),
+          actions: [
+            Obx(() {
+              return Row(
+                children: [
+                  appController.isDarkMode.value
+                      ? CustomText(
+                          text: MessageKeys.app_bar_theme_turn_light.tr)
+                      : CustomText(
+                          text: MessageKeys.app_bar_theme_switch_dark.tr),
+                  Switch(
+                    value: appController.isDarkMode.value,
+                    onChanged: (value) => appController.changeTheme(),
+                  ),
+                ],
+              );
+            }),
+            SizedBox(width: spacing.spaces.big),
+            Obx(
+              () => Visibility(
+                visible: authController.isLoggedIn.value,
+                child: CustomTextButton(
+                  onPressed: () => authController.signOut(),
+                  text: MessageKeys.sign_out.tr,
+                  width: 80.0,
+                  textSize: 12.0,
+                ),
+              ),
+            ),
+            SizedBox(width: spacing.spaces.big),
+            LanguageBar(),
+          ],
           bottom: TabBar(
             tabs: [
               Tab(
-                text: 'Main',
+                child: CustomText(text: MessageKeys.app_bar_tab_main.tr),
               ),
               Tab(
                 text: 'Values',
-              ),
-              Tab(
-                text: 'Space',
-              ),
-              Tab(
-                text: 'SpacedFlex',
               ),
             ],
           ),
         ),
         body: TabBarView(
           children: [
-            const MainTab(),
-            const ValuesTab(),
-            const SpaceTab(),
-            const SpacedFlexTab(),
+            MainTab(),
+            ValuesTab(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MainTab extends GetWidget<HomeController> {
+  MainTab();
+
+  @override
+  Widget build(BuildContext context) {
+    final spacing = Spacing.of(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: CustomText(text: MessageKeys.home_title.tr),
+        centerTitle: true,
+      ),
+      body: CustomForm(
+        child: ListView(
+          children: [
+            SpacedColumn.normal(
+              padding: spacing.insets.all.normal,
+              children: <Widget>[],
+            ),
           ],
         ),
       ),
@@ -93,147 +144,32 @@ class ValuesTab extends StatelessWidget {
   }
 }
 
-class SpaceTab extends StatelessWidget {
-  const SpaceTab();
-
-  Widget _box(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-      width: 20.0,
-      height: 20.0,
-    );
-  }
+class LanguageBar extends StatelessWidget {
+  const LanguageBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final spacing = Spacing.of(context);
     return Container(
-      color: Colors.blue.withOpacity(0.2),
-      margin: spacing.insets.all.big,
-      padding: spacing.insets.all.normal,
-      child: ListView(
-        children: <Widget>[
-          _box(context),
-          Space.extraSmall(),
-          _box(context),
-          Space.small(),
-          _box(context),
-          Space.semiSmall(),
-          _box(context),
-          Space.normal(),
-          _box(context),
-          Space.semiBig(),
-          _box(context),
-          Space.big(),
-          _box(context),
-          Space.extraBig(),
-          _box(context),
-        ],
-      ),
-    );
-  }
-}
-
-class SpacedFlexTab extends StatelessWidget {
-  const SpacedFlexTab();
-
-  Widget _box(BuildContext context) {
-    return Container(
-      color: Colors.green,
-      width: 20.0,
-      height: 20.0,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final spacing = Spacing.of(context);
-    return Container(
-      color: Colors.green.withOpacity(0.2),
-      child: ListView(
+      width: 120.0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          SpacedColumn.normal(
-            padding: spacing.insets.all.normal,
-            children: <Widget>[
-              _box(context),
-              _box(context),
-              _box(context),
-              _box(context),
-            ],
+          CustomTextButton(
+            text: 'LT',
+            onPressed: () => appController.locale = 'lt_LT',
+            textSize: 12.0,
+            width: 20.0,
+            margins: 6.0,
           ),
-          Center(
-            child: SpacedRow.normal(
-              padding: spacing.insets.all.normal,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                _box(context),
-                _box(context),
-                _box(context),
-                _box(context),
-              ],
-            ),
+          CustomTextButton(
+            text: 'EN',
+            onPressed: () => appController.locale = 'en_US',
+            textSize: 12.0,
+            width: 20.0,
+            margins: 6.0,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class MainTab extends StatelessWidget {
-  const MainTab();
-
-  @override
-  Widget build(BuildContext context) {
-    final spacing = Spacing.of(context);
-    final languageController = CustomDropdownController(
-      list: ['Lietuviškai', 'English'],
-      onChanged: (value) {
-        if (value == 'Lietuviškai') {
-          appController.locale = 'lt_LT';
-        } else {
-          appController.locale = 'en_EN';
-        }
-      },
-      labelText: MessageKeys.choose_language.tr,
-    );
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('HomeView'),
-        centerTitle: true,
-      ),
-      body: CustomForm(
-        child: ListView(
-          children: [
-            SpacedColumn.normal(
-              padding: spacing.insets.all.normal,
-              children: <Widget>[
-                Text(
-                  MessageKeys.hello.tr,
-                  style: TextStyle(fontSize: 20),
-                ),
-                CustomDropdown(controller: languageController),
-                CustomButton(
-                  onPressed: () => authController.signIn(),
-                  text: 'Sign In',
-                ),
-                Obx(
-                  () => Visibility(
-                    visible: authController.isLoggedIn.value,
-                    child: CustomButton(
-                      onPressed: () => authController.signOut(),
-                      text: 'Sign Out',
-                    ),
-                  ),
-                ),
-                CustomButton(
-                  onPressed: () => appController.changeTheme(),
-                  text: 'Change Theme',
-                ),
-              ],
-            ),
-          ],
-        ),
       ),
     );
   }

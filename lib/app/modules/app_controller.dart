@@ -6,24 +6,35 @@ import 'package:money_calculator_v2/app/core/theme/custom_theme.dart';
 
 class AppController extends GetxController {
   static var instance = Get.find<AppController>();
+  late final isDarkMode = Get.isDarkMode.obs;
 
-  final _locale = 'en_US'.obs;
   final isLoginWidgetDisplayed = true.obs;
-  final backgroundColor = Get.theme.scaffoldBackgroundColor.obs;
 
-  String get locale => _locale.value;
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
+  @override
+  void onClose() {}
 
   set locale(String value) {
     Get.updateLocale(Locale(value));
-    _locale.value = value;
-    print('Locale set to: ${_locale.value}.');
+    print('locale updated to: $value');
+    update();
   }
 
   changeTheme() {
-    backgroundColor.value =
-        Get.isDarkMode ? Light.backgroundColor : Dark.backgroundColor;
+    isDarkMode.value = !isDarkMode.value;
     Get.changeTheme(
-        Get.isDarkMode ? CustomTheme.lightTheme : CustomTheme.darkTheme);
+        isDarkMode.value ? CustomTheme.darkTheme : CustomTheme.lightTheme);
+    print('Theme changed to dark: ${isDarkMode.value}');
+    update();
   }
 
   changeDisplayedAuthWidget() {
