@@ -1,49 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:money_calculator_v2/app/core/values/controllers.dart';
-import 'package:money_calculator_v2/app/core/values/global_names.dart';
 import 'package:money_calculator_v2/app/core/values/languages/message_keys.dart';
 import 'package:money_calculator_v2/app/global_widgets/custom_widgets.dart';
-import 'package:money_calculator_v2/app/routes/app_pages.dart';
 import 'package:spaces/spaces.dart';
 
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  final appData = GetStorage();
   @override
   Widget build(BuildContext context) {
     final spacing = Spacing.of(context);
-    bool isDarkMode = appData.read(GlobalNames.DARK_MODE);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
           title: CustomTextButton(
-            onPressed: () => Get.toNamed(Routes.HOME),
+            onPressed: () => HomeView(),
             text: MessageKeys.app_name.tr,
             width: 220,
           ),
           actions: [
-            Row(
-              children: [
-                isDarkMode
-                    ? CustomText(text: 'Turn light')
-                    : CustomText(text: 'Switch dark'),
-                Switch(
-                  value: isDarkMode,
-                  onChanged: (value) =>
-                      appData.write(GlobalNames.DARK_MODE, value),
-                ),
-              ],
-            ),
-            SizedBox(width: spacing.spaces.extraBig),
-            LanguageBar(),
-          ],
-          flexibleSpace: Align(
-            alignment: Alignment.centerRight,
-            child: Obx(
+            Obx(() {
+              return Row(
+                children: [
+                  appController.isDarkMode.value
+                      ? CustomText(
+                          text: MessageKeys.app_bar_theme_turn_light.tr)
+                      : CustomText(
+                          text: MessageKeys.app_bar_theme_switch_dark.tr),
+                  Switch(
+                    value: appController.isDarkMode.value,
+                    onChanged: (value) => appController.changeTheme(),
+                  ),
+                ],
+              );
+            }),
+            SizedBox(width: spacing.spaces.big),
+            Obx(
               () => Visibility(
                 visible: authController.isLoggedIn.value,
                 child: CustomTextButton(
@@ -54,11 +48,13 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
             ),
-          ),
+            SizedBox(width: spacing.spaces.big),
+            LanguageBar(),
+          ],
           bottom: TabBar(
             tabs: [
               Tab(
-                text: MessageKeys.app_bar_tab_main.tr,
+                child: CustomText(text: MessageKeys.app_bar_tab_main.tr),
               ),
               Tab(
                 text: 'Values',
@@ -77,7 +73,7 @@ class HomeView extends GetView<HomeController> {
   }
 }
 
-class MainTab extends StatelessWidget {
+class MainTab extends GetWidget<HomeController> {
   MainTab();
 
   @override
@@ -86,7 +82,7 @@ class MainTab extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('HomeView'),
+        title: CustomText(text: MessageKeys.home_title.tr),
         centerTitle: true,
       ),
       body: CustomForm(
@@ -94,16 +90,7 @@ class MainTab extends StatelessWidget {
           children: [
             SpacedColumn.normal(
               padding: spacing.insets.all.normal,
-              children: <Widget>[
-                Text(
-                  MessageKeys.app_name.tr,
-                  style: TextStyle(fontSize: 20),
-                ),
-                CustomButton(
-                  onPressed: () => authController.signIn(),
-                  text: 'Sign In',
-                ),
-              ],
+              children: <Widget>[],
             ),
           ],
         ),
@@ -170,15 +157,17 @@ class LanguageBar extends StatelessWidget {
         children: [
           CustomTextButton(
             text: 'LT',
-            onPressed: () => appController.locale = 'lt_lt',
+            onPressed: () => appController.locale = 'lt_LT',
             textSize: 12.0,
-            width: 25,
+            width: 20.0,
+            margins: 6.0,
           ),
           CustomTextButton(
             text: 'EN',
             onPressed: () => appController.locale = 'en_US',
             textSize: 12.0,
-            width: 25,
+            width: 20.0,
+            margins: 6.0,
           ),
         ],
       ),

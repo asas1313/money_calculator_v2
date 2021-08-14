@@ -7,17 +7,13 @@ final _elevatedButtonShape = RoundedRectangleBorder(
 class Light {
   static final primaryColor = Colors.blue;
   static final accentColor = Colors.brown[300];
-  static final onPrimary = Colors.blue;
-  static final backgroundColor = Colors.white;
-  static final cardColor = Colors.grey.withOpacity(.3);
+  static final scaffoldBackgroundColor = Colors.white70;
 }
 
 class Dark {
   static final primaryColor = Colors.deepPurple[900];
   static final accentColor = Colors.brown[700];
-  static final onPrimary = Colors.white;
-  static final backgroundColor = Colors.black;
-  static final cardColor = Colors.grey.withOpacity(.7);
+  static final scaffoldBackgroundColor = Colors.black54;
 }
 
 class CustomTheme {
@@ -26,7 +22,8 @@ class CustomTheme {
       brightness: Brightness.light,
       primaryColor: Light.primaryColor,
       accentColor: Light.accentColor,
-      backgroundColor: Light.backgroundColor,
+      colorScheme: ColorScheme.light(),
+      scaffoldBackgroundColor: Light.scaffoldBackgroundColor,
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           shape: _elevatedButtonShape,
@@ -37,7 +34,6 @@ class CustomTheme {
           ),
         ),
       ),
-      cardColor: Light.cardColor,
     );
   }
 
@@ -46,16 +42,15 @@ class CustomTheme {
       brightness: Brightness.dark,
       primaryColor: Dark.primaryColor,
       accentColor: Dark.accentColor,
-      backgroundColor: Dark.backgroundColor,
       textTheme: ThemeData.dark().textTheme,
+      colorScheme: ColorScheme.dark(),
+      scaffoldBackgroundColor: Dark.scaffoldBackgroundColor,
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           shape: _elevatedButtonShape,
           primary: Dark.primaryColor,
-          textStyle: TextStyle(color: Dark.onPrimary),
         ),
       ),
-      cardColor: Dark.cardColor,
     );
   }
 }

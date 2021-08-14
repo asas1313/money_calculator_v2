@@ -11,7 +11,7 @@ class AppPages {
 
   static const INITIAL = Routes.HOME;
 
-  static final routes = [
+  static final pages = [
     GetPage(
       name: _Paths.HOME,
       page: () => HomeView(),
