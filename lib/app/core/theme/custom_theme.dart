@@ -11,7 +11,7 @@ class Light {
 }
 
 class Dark {
-  static final primaryColor = Colors.deepPurple[900];
+  static final primaryColor = Colors.deepPurple[700];
   static final accentColor = Colors.brown[700];
   static final scaffoldBackgroundColor = Colors.black54;
 }
@@ -28,10 +28,6 @@ class CustomTheme {
         style: ElevatedButton.styleFrom(
           shape: _elevatedButtonShape,
           primary: Light.primaryColor,
-          textStyle: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.w700,
-          ),
         ),
       ),
     );

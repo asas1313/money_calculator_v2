@@ -7,6 +7,7 @@ import 'package:money_calculator_v2/app/core/values/languages/message_keys.dart'
 import 'package:money_calculator_v2/app/data/model/user_model.dart';
 import 'package:money_calculator_v2/app/data/provider/user_fb_provider.dart';
 import 'package:money_calculator_v2/app/data/repositories/user_repository.dart';
+import 'package:money_calculator_v2/app/global_widgets/custom_layout.dart';
 import 'package:money_calculator_v2/app/modules/auth/views/auth_view.dart';
 import 'package:money_calculator_v2/app/modules/home/views/home_view.dart';
 
@@ -46,7 +47,7 @@ class AuthController extends GetxController {
       Get.offAll(() => AuthView());
     } else {
       isLoggedIn.value = true;
-      Get.offAll(() => HomeView());
+      Get.offAll(() => CustomLayout(child: HomeView()));
     }
   }
 

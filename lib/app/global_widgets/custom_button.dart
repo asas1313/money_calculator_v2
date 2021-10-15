@@ -15,13 +15,12 @@ class CustomButton extends StatelessWidget {
   final double margins;
 
   const CustomButton({
-    Key? key,
     required this.text,
     required this.onPressed,
     this.width,
     this.textSize = 22.0,
     this.margins = 14.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class CustomButton extends StatelessWidget {
         margin: EdgeInsets.all(margins),
         alignment: Alignment.center,
         child: CustomText(
-          text: text,
+          text: text.tr,
           size: textSize,
           weight: FontWeight.normal,
         ),
