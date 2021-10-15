@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:money_calculator_v2/app/core/theme/custom_theme.dart';
+import 'package:money_calculator_v2/app/global_widgets/custom_layout.dart';
 import 'package:money_calculator_v2/app/modules/home/views/home_view.dart';
 import 'package:spaces/spaces.dart';
 
@@ -47,7 +48,7 @@ class App extends StatelessWidget {
             controller.isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
         theme: CustomTheme.lightTheme,
         darkTheme: CustomTheme.darkTheme,
-        home: HomeView(),
+        home: CustomLayout(child: HomeView()),
       );
     });
   }

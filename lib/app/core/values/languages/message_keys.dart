@@ -12,6 +12,16 @@ class MessageKeys {
   static const lithuanian = 'lithuanian';
   static const english = 'english';
   static const sign_out = 'sign_out';
+  // Authentication texts
+  static const auth_name = 'auth_name';
+  static const auth_email = 'auth_email';
+  static const auth_password = 'auth_password';
+  static const auth_login = 'auth_login';
+  static const auth_register = 'auth_register';
+  static const auth_sign_in1 = 'auth_sign_in1';
+  static const auth_sign_in2 = 'auth_sign_in2';
+  static const auth_create_account1 = 'auth_create_account1';
+  static const auth_create_account2 = 'auth_create_account2';
   // Home view text
   static const home_title = 'home_title';
 }

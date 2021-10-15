@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BottomTextWidget extends StatelessWidget {
   final Function()? onPressed;
@@ -24,7 +25,7 @@ class BottomTextWidget extends StatelessWidget {
             onPressed: onPressed,
             child: Text(
               " $text2",
-              style: TextStyle(color: Colors.blue),
+              style: Get.textTheme.bodyText1!.copyWith(color: Colors.blue),
             )),
       ],
     );

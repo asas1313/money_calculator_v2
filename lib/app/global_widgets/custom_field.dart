@@ -3,19 +3,20 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:money_calculator_v2/app/core/values/global_widget_values.dart';
+import 'package:money_calculator_v2/app/modules/app_controller.dart';
 
-class CustomField extends StatelessWidget {
-  final TextEditingController controller;
+class CustomField extends GetWidget<AppController> {
+  final TextEditingController textEditingController;
   final Icon? icon;
-  final String? hintText;
+  final String hintText;
   final bool obscureText;
   final double? width;
 
   const CustomField({
     Key? key,
-    required this.controller,
+    required this.textEditingController,
     this.icon,
-    this.hintText,
+    this.hintText = '',
     this.obscureText = false,
     this.width,
   }) : super(key: key);
@@ -32,17 +33,18 @@ class CustomField extends StatelessWidget {
           margin: EdgeInsets.only(top: 30),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
-            color: Get.theme.cardColor,
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             child: TextField(
-              controller: controller,
+              controller: textEditingController,
               obscureText: obscureText,
               decoration: InputDecoration(
                 icon: icon,
-                border: InputBorder.none,
-                hintText: hintText,
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(width: 2.0),
+                    borderRadius: BorderRadius.circular(25)),
+                hintText: hintText.tr,
               ),
             ),
           ),

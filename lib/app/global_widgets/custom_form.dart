@@ -5,11 +5,12 @@ import 'package:money_calculator_v2/app/modules/app_controller.dart';
 
 class CustomForm extends GetWidget<AppController> {
   final Widget child;
+  final bool showMenu;
 
   const CustomForm({
-    Key? key,
     required this.child,
-  }) : super(key: key);
+    this.showMenu = false,
+  });
 
   @override
   Widget build(BuildContext context) {
