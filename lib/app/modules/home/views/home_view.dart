@@ -25,14 +25,15 @@ class HomeView extends GetView<HomeController> {
               return Row(
                 children: [
                   appController.isDarkMode.value
-                      ? CustomText(
-                          text: MessageKeys.app_bar_theme_turn_light.tr)
-                      : CustomText(
-                          text: MessageKeys.app_bar_theme_switch_dark.tr),
+                      ? Icon(Icons.wb_sunny)
+                      : Container(),
                   Switch(
                     value: appController.isDarkMode.value,
                     onChanged: (value) => appController.changeTheme(),
                   ),
+                  appController.isDarkMode.value
+                      ? Container()
+                      : Icon(Icons.nightlight_round),
                 ],
               );
             }),
@@ -43,7 +44,7 @@ class HomeView extends GetView<HomeController> {
                 child: CustomTextButton(
                   onPressed: () => authController.signOut(),
                   text: MessageKeys.sign_out.tr,
-                  width: 80.0,
+                  width: 70.0,
                   textSize: 12.0,
                 ),
               ),
@@ -102,26 +103,6 @@ class MainTab extends GetWidget<HomeController> {
 class ValuesTab extends StatelessWidget {
   const ValuesTab();
 
-  Widget _box(BuildContext context, String title, double height) {
-    final spacing = Spacing.of(context);
-    return Padding(
-      padding: spacing.insets.all.normal,
-      child: Column(
-        children: [
-          Text(
-            title,
-            textAlign: TextAlign.center,
-          ),
-          Container(
-            color: Colors.red,
-            width: spacing.spaces.big,
-            height: height,
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final spacing = Spacing.of(context);
@@ -142,6 +123,26 @@ class ValuesTab extends StatelessWidget {
       ),
     );
   }
+
+  Widget _box(BuildContext context, String title, double height) {
+    final spacing = Spacing.of(context);
+    return Padding(
+      padding: spacing.insets.all.normal,
+      child: Column(
+        children: [
+          Text(
+            title,
+            textAlign: TextAlign.center,
+          ),
+          Container(
+            color: Colors.red,
+            width: spacing.spaces.big,
+            height: height,
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class LanguageBar extends StatelessWidget {
@@ -150,7 +151,7 @@ class LanguageBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 120.0,
+      width: 130.0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         mainAxisSize: MainAxisSize.min,
