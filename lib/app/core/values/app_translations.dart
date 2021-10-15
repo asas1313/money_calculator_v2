@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import 'languages/en_us.dart';
+import 'languages/en_US.dart';
 import 'languages/lt_LT.dart';
 
 class Messages extends Translations {
