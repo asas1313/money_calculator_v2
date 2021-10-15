@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "875588855024",
+    "project_id": "money-calculator-2",
+    "storage_bucket": "money-calculator-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:875588855024:android:2469922998074211e04e35",
+        "android_client_info": {
+          "package_name": "com.example.money_calculator_v2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "875588855024-rfumqe80gt6dvf53jlh9bmjl028uu3pv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.money_calculator_v2",
+            "certificate_hash": "add48a5ef0c577c940a116120c4039ef8c92f7da"
+          }
+        },
+        {
+          "client_id": "875588855024-0kp7r1n651igqeppebvbg0s3ci2a6kj1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQgxY0OzLU-XtYwYBUtRKdLwV8Tzy3oaw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "875588855024-0kp7r1n651igqeppebvbg0s3ci2a6kj1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
