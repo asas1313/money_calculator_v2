@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:money_calculator_v2/app/core/values/controllers.dart';
 import 'package:money_calculator_v2/app/core/values/languages/message_keys.dart';
+import 'package:money_calculator_v2/app/global_widgets/custom_drawer.dart';
+import 'package:money_calculator_v2/app/global_widgets/custom_theme_switch.dart';
 import 'package:money_calculator_v2/app/modules/home/views/home_view.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:spaces/spaces.dart';
@@ -28,33 +30,29 @@ class CustomLayout extends StatelessWidget {
               : Padding(
                   padding: EdgeInsets.only(right: 20.0),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Scaffold.of(context).openDrawer();
+                    },
                     child: Icon(Icons.menu),
                   ));
         }),
-        title: CustomTextButton(
-          onPressed: () => CustomLayout(child: HomeView()),
-          text: MessageKeys.app_name,
-          width: 220,
-        ),
+        title: ResponsiveBuilder(builder: (context, sizingInformation) {
+          return sizingInformation.isMobile
+              ? Container()
+              : CustomTextButton(
+                  onPressed: () => Get.to(CustomLayout(child: HomeView())),
+                  text: MessageKeys.app_name,
+                  width: 220,
+                );
+        }),
         actions: [
-          Obx(() {
-            return Row(
-              children: [
-                appController.isDarkMode.value
-                    ? CustomText(text: MessageKeys.app_bar_theme_turn_light)
-                    : CustomText(text: MessageKeys.app_bar_theme_switch_dark),
-                Switch(
-                  value: appController.isDarkMode.value,
-                  onChanged: (value) => appController.changeTheme(),
-                ),
-              ],
-            );
-          }),
+          CustomThemeSwitch(),
           SizedBox(width: spacing.spaces.big),
           LanguageBar(),
+          SizedBox(width: spacing.spaces.small),
         ],
       ),
+      drawer: CustomDrawer(),
       body: CustomForm(
         child: ResponsiveBuilder(builder: (context, sizingInformation) {
           return ListView(

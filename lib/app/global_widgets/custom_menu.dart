@@ -38,9 +38,9 @@ class CustomMenu extends GetWidget<AppController> {
             children: [
               CustomTextButton(
                 text: MessageKeys.home_title,
-                onPressed: () => CustomLayout(
+                onPressed: () => Get.to(CustomLayout(
                   child: HomeView(),
-                ),
+                )),
                 textSize: 18,
               ),
               SizedBox(width: spacing.spaces.big),
